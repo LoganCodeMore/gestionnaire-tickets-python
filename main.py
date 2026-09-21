@@ -1,4 +1,5 @@
 machines = []
+tickets = []
 
 
 while True:
@@ -57,10 +58,84 @@ while True:
 
     elif choix == "3":
         print("Vous avez choisi de créer un ticket")
+        print()
+
+        if not machines:
+            print("Impossible de créer un ticket : aucune machine enregistrée")
+
+        else:
+            for numero, machine in enumerate(machines, start=1):
+                print(f"Machine {numero}")
+                print(f"Nom : {machine['nom']}")
+                print(f"Utilisateur : {machine['utilisateur']}")
+                print(f"Service : {machine['service']}")
+                print()
+
+            try:
+                numero_machine = int(input("Quelle machine voulez-vous choisir pour créer un ticket ? "))
+
+                if 1 <= numero_machine <= len(machines):
+
+                    machine_selectionnee = machines[numero_machine - 1]
+
+                    print(f"Machine sélectionnée : {machine_selectionnee['nom']}")
+
+
+                    titre_incident = input("Titre de l'incident : ")
+                    description_incident = input("Description de l'incident : ")
+
+                    gravite_valides = ["Basse", "Moyenne", "Haute", "Critique"]
+
+                    while True:
+                        gravite_incident = input("Gravité de l'incident (Basse, Moyenne, Haute, Critique) : ").strip().capitalize()
+
+                        if gravite_incident in gravite_valides:
+                            break
+
+                        print("Gravité invalide. Choisissez Basse, Moyenne, Haute ou Critique.")
+
+
+                    ticket = {
+                        "id": len(tickets) + 1,
+                        "machine": machine_selectionnee['nom'],
+                        "titre": titre_incident,
+                        "description": description_incident,
+                        "gravite": gravite_incident,
+                        "statut": "Nouveau"
+                    }
+
+                    tickets.append(ticket)
+
+                    print(f"Le ticket {ticket['id']} a été créé avec succès.")
+                    
+
+                else:
+                    print("Ce nombre ne correspond pas à un numéro de machine.")
+
+            except ValueError:
+                print("Veuillez entrer un nombre.")
 
 
     elif choix == "4":
         print("Vous avez choisi d'afficher les tickets")
+        print()
+
+        if not tickets:
+            print("Aucun ticket enregistré.")
+
+        else:
+            print("=== LISTE DES TICKETS ===")
+            print()
+
+            for ticket in tickets:
+                print(f"Ticket {ticket['id']}")
+                print(f"Machine : {ticket['machine']}")
+                print(f"Titre : {ticket['titre']}")
+                print(f"Description : {ticket['description']}")
+                print(f"Gravité : {ticket['gravite']}")
+                print(f"Statut : {ticket['statut']}")
+                print("--------------------------------------")
+                print()
 
 
     elif choix == "5":
