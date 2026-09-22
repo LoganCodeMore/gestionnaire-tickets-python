@@ -1,8 +1,4 @@
-machines = []
-tickets = []
-
-
-while True:
+def afficher_menu():
 
     print("=== GESTIONNAIRE DE TICKETS ===")
     print()
@@ -14,199 +10,222 @@ while True:
     print("0 - Quitter")
     print()
 
+def ajouter_machine(machines):
 
+    print("Vous avez choisi d'ajouter une machine au parc informatique")
+    print()
+    
+    machine_nom = input("Quel est le nom de la machine ? ")
+    machine_utilisateur = input("Quel est l'utilisateur de cette machine ? ")
+    machine_service = input("À quel service appartient cette machine ? ")
+
+    machine = {
+        "nom": machine_nom,
+        "utilisateur": machine_utilisateur,
+        "service": machine_service
+    }
+
+    machines.append(machine)
+
+    print("La machine a été ajoutée au parc informatique.")
+
+
+def afficher_machines(machines):
+
+    print("Vous avez choisi d'afficher les machines")
+    print()
+               
+    if not machines:
+        print("Aucune machine enregistrée dans le parc informatique")
+
+    else:
+
+        print("=== MACHINES DU PARC ===")
+        print()
+
+        for numero, machine in enumerate(machines, start=1):
+            print(f"Machine {numero}")
+            print(f"Nom : {machine['nom']}")
+            print(f"Utilisateur : {machine['utilisateur']}")
+            print(f"Service : {machine['service']}")
+            print("-------------------------------------")
+            print()
+
+
+def creer_ticket(machines, tickets):
+
+    print("Vous avez choisi de créer un ticket")
+    print()
+
+    if not machines:
+        print("Impossible de créer un ticket : aucune machine enregistrée")
+
+    else:
+        for numero, machine in enumerate(machines, start=1):
+            print(f"Machine {numero}")
+            print(f"Nom : {machine['nom']}")
+            print(f"Utilisateur : {machine['utilisateur']}")
+            print(f"Service : {machine['service']}")
+            print()
+
+        try:
+            numero_machine = int(input("Quelle machine voulez-vous choisir pour créer un ticket ? "))
+
+            if 1 <= numero_machine <= len(machines):
+
+                machine_selectionnee = machines[numero_machine - 1]
+
+                print(f"Machine sélectionnée : {machine_selectionnee['nom']}")
+
+
+                titre_incident = input("Titre de l'incident : ")
+                description_incident = input("Description de l'incident : ")
+
+                gravites_valides = ["Basse", "Moyenne", "Haute", "Critique"]
+
+                while True:
+                    gravite_incident = input("Gravité de l'incident (Basse, Moyenne, Haute, Critique) : ").strip().capitalize()
+
+                    if gravite_incident in gravites_valides:
+                        break
+
+                    print("Gravité invalide. Choisissez Basse, Moyenne, Haute ou Critique.")
+
+
+                ticket = {
+                    "id": len(tickets) + 1,
+                    "machine": machine_selectionnee['nom'],
+                    "titre": titre_incident,
+                    "description": description_incident,
+                    "gravite": gravite_incident,
+                    "statut": "Nouveau"
+                }
+
+                tickets.append(ticket)
+
+                print(f"Le ticket {ticket['id']} a été créé avec succès.")
+                
+
+            else:
+                print("Ce nombre ne correspond pas à un numéro de machine.")
+
+        except ValueError:
+            print("Veuillez entrer un nombre.")
+
+
+def afficher_tickets(tickets):
+
+    print("Vous avez choisi d'afficher les tickets")
+    print()
+
+    if not tickets:
+        print("Aucun ticket enregistré.")
+
+    else:
+        print("=== LISTE DES TICKETS ===")
+        print()
+
+        for ticket in tickets:
+            print(f"Ticket {ticket['id']}")
+            print(f"Machine : {ticket['machine']}")
+            print(f"Titre : {ticket['titre']}")
+            print(f"Description : {ticket['description']}")
+            print(f"Gravité : {ticket['gravite']}")
+            print(f"Statut : {ticket['statut']}")
+            print("--------------------------------------")
+            print()
+
+
+def modifier_statut_ticket(tickets):
+
+    print("Vous avez choisi de modifier le statut d'un ticket")
+    print()
+
+    if not tickets:
+        print("Modification impossible : aucun ticket enregistré.")
+
+    else:
+
+        for ticket in tickets:
+            print(f"id : {ticket['id']}")
+            print(f"Titre : {ticket['titre']}")
+            print(f"Statut : {ticket['statut']}")
+            print("------------------------------")
+            print()
+
+        try:
+
+            id_ticket_modifier = int(input("Entrez l'id du ticket à modifier : "))
+
+            ticket_selectionne = None
+
+            for ticket in tickets:
+                if ticket['id'] == id_ticket_modifier:
+                    ticket_selectionne = ticket
+                    break
+
+            if ticket_selectionne is None:
+                print("Aucun ticket ne correspond à cet identifiant.")
+
+            else:
+                print(f"Ticket sélectionné : {ticket_selectionne['titre']}")
+                print()
+
+                statuts_valides = ["Nouveau", "En cours", "Résolu", "Fermé"]
+
+                for numero, statut in enumerate(statuts_valides, start=1):
+                    print(f"{numero} - {statut}")
+
+                print()
+
+                try:
+
+                    choix_statut = int(input("Choisissez le nouveau statut : "))
+
+                    if 1 <= choix_statut <= len(statuts_valides):
+                        nouveau_statut = statuts_valides[choix_statut - 1]
+
+                        ticket_selectionne["statut"] = nouveau_statut
+
+                        print(f"Le statut du ticket {ticket_selectionne['id']} a été modifié : {ticket_selectionne['statut']}")
+
+                    else:
+                        print("Ce numéro ne correspond à aucun statut.")
+
+
+                except ValueError:
+                    print("Un nombre est attendu pour modifier le statut du ticket.")
+
+
+        except ValueError:
+            print("L'id du ticket doit être un nombre.")
+
+
+
+
+        
+machines = []
+tickets = []
+
+
+while True:
+
+    afficher_menu()
     choix = input("Entrez une commande : ")
 
     if choix == "1":
-        print("Vous avez choisi d'ajouter une machine au parc informatique")
-        print()
-
-        machine_nom = input("Quel est le nom de la machine ? ")
-        machine_utilisateur = input("Quel est l'utilisateur de cette machine ? ")
-        machine_service = input("A quel service appartient cette machine ? ")
-
-        machine = {
-            "nom": machine_nom,
-            "utilisateur": machine_utilisateur,
-            "service": machine_service
-        }
-
-        machines.append(machine)
-
-        print("La machine a été ajouté au parc informatique.")
-
-
+        ajouter_machine(machines)
     elif choix == "2":
-        print("Vous avez choisi d'afficher les machines")
-        
-
-        if not machines:
-            print("Aucune machines enregistrée dans le parc informatique")
-
-        else :
-
-            print("=== MACHINES DU PARC ===")
-            print()
-
-            for numero, machine in enumerate(machines, start=1):
-                print(f"Machine {numero}")
-                print(f"Nom : {machine['nom']}")
-                print(f"Utilisateur : {machine['utilisateur']}")
-                print(f"Service : {machine['service']}")
-                print()
-
-
+        afficher_machines(machines)
     elif choix == "3":
-        print("Vous avez choisi de créer un ticket")
-        print()
-
-        if not machines:
-            print("Impossible de créer un ticket : aucune machine enregistrée")
-
-        else:
-            for numero, machine in enumerate(machines, start=1):
-                print(f"Machine {numero}")
-                print(f"Nom : {machine['nom']}")
-                print(f"Utilisateur : {machine['utilisateur']}")
-                print(f"Service : {machine['service']}")
-                print()
-
-            try:
-                numero_machine = int(input("Quelle machine voulez-vous choisir pour créer un ticket ? "))
-
-                if 1 <= numero_machine <= len(machines):
-
-                    machine_selectionnee = machines[numero_machine - 1]
-
-                    print(f"Machine sélectionnée : {machine_selectionnee['nom']}")
-
-
-                    titre_incident = input("Titre de l'incident : ")
-                    description_incident = input("Description de l'incident : ")
-
-                    gravite_valides = ["Basse", "Moyenne", "Haute", "Critique"]
-
-                    while True:
-                        gravite_incident = input("Gravité de l'incident (Basse, Moyenne, Haute, Critique) : ").strip().capitalize()
-
-                        if gravite_incident in gravite_valides:
-                            break
-
-                        print("Gravité invalide. Choisissez Basse, Moyenne, Haute ou Critique.")
-
-
-                    ticket = {
-                        "id": len(tickets) + 1,
-                        "machine": machine_selectionnee['nom'],
-                        "titre": titre_incident,
-                        "description": description_incident,
-                        "gravite": gravite_incident,
-                        "statut": "Nouveau"
-                    }
-
-                    tickets.append(ticket)
-
-                    print(f"Le ticket {ticket['id']} a été créé avec succès.")
-                    
-
-                else:
-                    print("Ce nombre ne correspond pas à un numéro de machine.")
-
-            except ValueError:
-                print("Veuillez entrer un nombre.")
-
-
+        creer_ticket(machines, tickets)
     elif choix == "4":
-        print("Vous avez choisi d'afficher les tickets")
-        print()
-
-        if not tickets:
-            print("Aucun ticket enregistré.")
-
-        else:
-            print("=== LISTE DES TICKETS ===")
-            print()
-
-            for ticket in tickets:
-                print(f"Ticket {ticket['id']}")
-                print(f"Machine : {ticket['machine']}")
-                print(f"Titre : {ticket['titre']}")
-                print(f"Description : {ticket['description']}")
-                print(f"Gravité : {ticket['gravite']}")
-                print(f"Statut : {ticket['statut']}")
-                print("--------------------------------------")
-                print()
-
-
+        afficher_tickets(tickets)       
     elif choix == "5":
-        print("Vous avez choisi de modifier le statut d'un ticket")
-        print()
-
-        if not tickets:
-            print("Modification impossible : aucun ticket enregistré.")
-
-        else:
-
-            for ticket in tickets:
-                print(f"id : {ticket['id']}")
-                print(f"Titre : {ticket['titre']}")
-                print(f"Statut : {ticket['statut']}")
-                print("------------------------------")
-                print()
-
-            try:
-
-                id_ticket_modifier = int(input("Entrez l'id du ticket à modifier : "))
-
-                ticket_selectionne = None
-
-                for ticket in tickets:
-                    if ticket['id'] == id_ticket_modifier:
-                        ticket_selectionne = ticket
-                        break
-
-                if ticket_selectionne is None:
-                    print("Aucun ticket ne correspond à cet identifiant.")
-
-                else:
-                    print(f"Ticket sélectionné : {ticket_selectionne['titre']}")
-                    print()
-
-                    statuts_valides = ["Nouveau", "En cours", "Résolu", "Fermé"]
-
-                    for numero, statut in enumerate(statuts_valides, start=1):
-                        print(f"{numero} - {statut}")
-
-                    print()
-
-                    try:
-
-                        choix_statut = int(input("Choisissez le nouveau statut : "))
-
-                        if 1 <= choix_statut <= len(statuts_valides):
-                            nouveau_statut = statuts_valides[choix_statut - 1]
-
-                            ticket_selectionne["statut"] = nouveau_statut
-
-                            print(f"Le statut du ticket {ticket_selectionne['id']} a été modifié : {ticket_selectionne['statut']}")
-
-                        else:
-                            print("Ce numéro ne correspond à aucun statut.")
-
-
-                    except ValueError:
-                        print("Un nombre est attendu pour modifier le statut du ticket.")
-
-
-            except ValueError:
-                print("L'id du ticket doit être un nombre.")
-
-            
-
+        modifier_statut_ticket(tickets)
     elif choix == "0":
         print("Au revoir")
-        break
-        
+        break       
     else:
         print("Commande invalide")
 
