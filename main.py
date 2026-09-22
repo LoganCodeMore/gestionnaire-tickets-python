@@ -1,3 +1,34 @@
+import json
+
+def charger_donnees():
+
+    try:
+        with open("donnees.json", "r", encoding="utf-8") as fichier:
+            donnees = json.load(fichier)
+
+            machines = donnees.get("machines", [])
+            tickets = donnees.get("tickets", [])
+
+            return machines, tickets
+
+    except FileNotFoundError:
+        return [], []
+
+    except json.JSONDecodeError:
+        print("Le fichier de données est invalide. Démarrage avec des listes vides.")
+        return [], []
+
+def sauvegarder_donnees(machines, tickets):
+
+    donnees = {
+        "machines": machines,
+        "tickets": tickets
+    }
+
+    with open("donnees.json", "w", encoding="utf-8") as fichier:
+        json.dump(donnees, fichier, ensure_ascii=False, indent=4)
+
+
 def afficher_menu():
 
     print("=== GESTIONNAIRE DE TICKETS ===")
@@ -202,11 +233,8 @@ def modifier_statut_ticket(tickets):
 
 
 
-
+machines, tickets = charger_donnees()
         
-machines = []
-tickets = []
-
 
 while True:
 
@@ -215,16 +243,20 @@ while True:
 
     if choix == "1":
         ajouter_machine(machines)
+        sauvegarder_donnees(machines, tickets)
     elif choix == "2":
         afficher_machines(machines)
     elif choix == "3":
         creer_ticket(machines, tickets)
+        sauvegarder_donnees(machines, tickets)
     elif choix == "4":
         afficher_tickets(tickets)       
     elif choix == "5":
         modifier_statut_ticket(tickets)
+        sauvegarder_donnees(machines, tickets)
     elif choix == "0":
-        print("Au revoir")
+        sauvegarder_donnees(machines, tickets)
+        print("Données sauvegardées. Au revoir.")
         break       
     else:
         print("Commande invalide")
