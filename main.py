@@ -140,7 +140,68 @@ while True:
 
     elif choix == "5":
         print("Vous avez choisi de modifier le statut d'un ticket")
+        print()
 
+        if not tickets:
+            print("Modification impossible : aucun ticket enregistré.")
+
+        else:
+
+            for ticket in tickets:
+                print(f"id : {ticket['id']}")
+                print(f"Titre : {ticket['titre']}")
+                print(f"Statut : {ticket['statut']}")
+                print("------------------------------")
+                print()
+
+            try:
+
+                id_ticket_modifier = int(input("Entrez l'id du ticket à modifier : "))
+
+                ticket_selectionne = None
+
+                for ticket in tickets:
+                    if ticket['id'] == id_ticket_modifier:
+                        ticket_selectionne = ticket
+                        break
+
+                if ticket_selectionne is None:
+                    print("Aucun ticket ne correspond à cet identifiant.")
+
+                else:
+                    print(f"Ticket sélectionné : {ticket_selectionne['titre']}")
+                    print()
+
+                    statuts_valides = ["Nouveau", "En cours", "Résolu", "Fermé"]
+
+                    for numero, statut in enumerate(statuts_valides, start=1):
+                        print(f"{numero} - {statut}")
+
+                    print()
+
+                    try:
+
+                        choix_statut = int(input("Choisissez le nouveau statut : "))
+
+                        if 1 <= choix_statut <= len(statuts_valides):
+                            nouveau_statut = statuts_valides[choix_statut - 1]
+
+                            ticket_selectionne["statut"] = nouveau_statut
+
+                            print(f"Le statut du ticket {ticket_selectionne['id']} a été modifié : {ticket_selectionne['statut']}")
+
+                        else:
+                            print("Ce numéro ne correspond à aucun statut.")
+
+
+                    except ValueError:
+                        print("Un nombre est attendu pour modifier le statut du ticket.")
+
+
+            except ValueError:
+                print("L'id du ticket doit être un nombre.")
+
+            
 
     elif choix == "0":
         print("Au revoir")
