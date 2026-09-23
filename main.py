@@ -54,6 +54,24 @@ def demander_texte(message):
     return texte
 
 
+def generer_id_ticket(tickets):
+
+    if not tickets:
+        identifiant_suivant = 1
+
+        return identifiant_suivant
+    
+
+    else:
+        identifiants = [ticket['id'] for ticket in tickets]
+
+        identifiant_max = max(identifiants)
+
+        identifiant_suivant = identifiant_max + 1
+
+        return identifiant_suivant
+
+
 def ajouter_machine(machines):
 
     print("Vous avez choisi d'ajouter une machine au parc informatique")
@@ -137,7 +155,7 @@ def creer_ticket(machines, tickets):
 
 
                 ticket = {
-                    "id": len(tickets) + 1,
+                    "id": generer_id_ticket(tickets),
                     "machine": machine_selectionnee['nom'],
                     "titre": titre_incident,
                     "description": description_incident,
