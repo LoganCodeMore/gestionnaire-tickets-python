@@ -230,8 +230,24 @@ def supprimer_ticket(tickets):
                 print("Aucun ticket correspondant pour la suppression.")
 
             else:
-                tickets.remove(ticket_selectionne)
-                print(f"Le ticket {ticket_selectionne['id']} a été supprimé.")
+                print("Ticket sélectionné : ")
+                print(f"ID : {ticket_selectionne['id']}")
+                print(f"Titre : {ticket_selectionne['titre']}")
+                print("-----------------------------------------")
+                print()
+
+                reponse_suppression = input("Voulez-vous supprimer ce ticket ? ").strip().lower()
+
+                while reponse_suppression != "oui" and reponse_suppression != "non":
+                    print("Saisie invalide, pour confirmer la suppression du ticket tapez oui, pour annuler la suppression tapez non.")
+                    reponse_suppression = input("Voulez-vous supprimer ce ticket ? ").strip().lower()
+
+                if reponse_suppression == "oui":
+                    tickets.remove(ticket_selectionne)    
+                    print("Suppression confirmée.")
+
+                else:
+                    print("Demande de suppression annulée, le ticket est conservé.")
 
 
         except ValueError:
