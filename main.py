@@ -38,6 +38,7 @@ def afficher_menu():
     print("3 - Créer un ticket")
     print("4 - Afficher les tickets")
     print("5 - Modifier le statut d'un ticket")
+    print("6 - Supprimer un ticket")
     print("0 - Quitter")
     print()
 
@@ -198,6 +199,46 @@ def afficher_tickets(tickets):
             print()
 
 
+def supprimer_ticket(tickets):
+
+    if not tickets:
+        print("Suppression impossible : aucun ticket enregistré.")
+
+    else:
+        print("=== LISTE DES TICKETS ===")
+        print()
+        for ticket in tickets:
+            print(f"ID : {ticket['id']}")
+            print(f"Titre : {ticket['titre']}")
+            print("-----------------------------")
+            print()
+
+        ticket_selectionne = None
+
+        try:
+            id_supprimer = int(input("Entrez l'identifiant du ticket à supprimer : "))
+
+            
+            for ticket in tickets:
+
+                if ticket['id'] == id_supprimer:
+
+                    ticket_selectionne = ticket
+                    break
+
+            if ticket_selectionne is None:
+                print("Aucun ticket correspondant pour la suppression.")
+
+            else:
+                tickets.remove(ticket_selectionne)
+                print(f"Le ticket {ticket_selectionne['id']} a été supprimé.")
+
+
+        except ValueError:
+            print("Un nombre est attendu pour sélectionner un ticket.")
+
+
+
 def modifier_statut_ticket(tickets):
 
     print("Vous avez choisi de modifier le statut d'un ticket")
@@ -285,6 +326,9 @@ while True:
     elif choix == "5":
         modifier_statut_ticket(tickets)
         sauvegarder_donnees(machines, tickets)
+    elif choix == "6":
+        supprimer_ticket(tickets)
+        sauvegarder_donnees(machines, tickets)  
     elif choix == "0":
         sauvegarder_donnees(machines, tickets)
         print("Données sauvegardées. Au revoir.")
