@@ -73,6 +73,17 @@ def generer_id_ticket(tickets):
         return identifiant_suivant
 
 
+def trouver_ticket_id(tickets, id_ticket):
+
+    for ticket in tickets:
+
+        if ticket['id'] == id_ticket:
+
+            return ticket
+
+    return None
+
+
 def ajouter_machine(machines):
 
     print("Vous avez choisi d'ajouter une machine au parc informatique")
@@ -213,18 +224,12 @@ def supprimer_ticket(tickets):
             print("-----------------------------")
             print()
 
-        ticket_selectionne = None
 
         try:
             id_supprimer = int(input("Entrez l'identifiant du ticket à supprimer : "))
 
             
-            for ticket in tickets:
-
-                if ticket['id'] == id_supprimer:
-
-                    ticket_selectionne = ticket
-                    break
+            ticket_selectionne = trouver_ticket_id(tickets, id_supprimer)
 
             if ticket_selectionne is None:
                 print("Aucun ticket correspondant pour la suppression.")
@@ -276,12 +281,9 @@ def modifier_statut_ticket(tickets):
 
             id_ticket_modifier = int(input("Entrez l'id du ticket à modifier : "))
 
-            ticket_selectionne = None
-
-            for ticket in tickets:
-                if ticket['id'] == id_ticket_modifier:
-                    ticket_selectionne = ticket
-                    break
+            
+            ticket_selectionne = trouver_ticket_id(tickets, id_ticket_modifier)
+            
 
             if ticket_selectionne is None:
                 print("Aucun ticket ne correspond à cet identifiant.")
