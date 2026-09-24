@@ -39,6 +39,7 @@ def afficher_menu():
     print("4 - Afficher les tickets")
     print("5 - Modifier le statut d'un ticket")
     print("6 - Supprimer un ticket")
+    print("7 - Afficher les tickets par statut")
     print("0 - Quitter")
     print()
 
@@ -82,6 +83,61 @@ def trouver_ticket_id(tickets, id_ticket):
             return ticket
 
     return None
+
+
+def filtrer_tickets_par_statut(tickets, statut_recherche):
+
+    tickets_filtres = []
+
+    for ticket in tickets:
+
+        if ticket['statut'] == statut_recherche:
+
+            tickets_filtres.append(ticket)
+
+    return tickets_filtres
+
+
+def afficher_tickets_par_statut(tickets):
+
+    if not tickets:
+        print("Aucun ticket enregistré.")
+
+    else:
+        statuts_valides = ["Nouveau", "En cours", "Résolu", "Fermé"]
+
+        for numero, statut in enumerate(statuts_valides, start=1):
+            print(f"{numero} - {statut}")
+
+
+        try :
+
+            numero_statut = int(input("Sélectionnez un statut : "))
+
+            if 1 <= numero_statut <= len(statuts_valides):
+
+                statut_recherche = statuts_valides[numero_statut - 1]
+
+                tickets_filtres = filtrer_tickets_par_statut(tickets, statut_recherche)
+                
+                if not tickets_filtres:
+                    print("Aucun ticket ne correspond à ce statut.")
+        
+        
+                else:
+                    print("=== LISTE DES TICKETS PAR STATUT ===")
+                    for ticket in tickets_filtres:
+                        print(f"ID : {ticket['id']}")
+                        print(f"Titre : {ticket['titre']}")
+                        print(f"Statut : {ticket['statut']}")
+                        print("------------------------------")
+                        print()
+
+            else:
+                print("Ce nombre ne correspond à aucun statut.")
+
+        except ValueError:
+            print("Un nombre est attendu pour filtrer par statut.") 
 
 
 def ajouter_machine(machines):
@@ -346,7 +402,9 @@ while True:
         sauvegarder_donnees(machines, tickets)
     elif choix == "6":
         supprimer_ticket(tickets)
-        sauvegarder_donnees(machines, tickets)  
+        sauvegarder_donnees(machines, tickets)
+    elif choix == "7":
+        afficher_tickets_par_statut(tickets)
     elif choix == "0":
         sauvegarder_donnees(machines, tickets)
         print("Données sauvegardées. Au revoir.")
