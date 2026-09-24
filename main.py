@@ -40,6 +40,7 @@ def afficher_menu():
     print("5 - Modifier le statut d'un ticket")
     print("6 - Supprimer un ticket")
     print("7 - Afficher les tickets par statut")
+    print("8 - Afficher les tickets par gravité")
     print("0 - Quitter")
     print()
 
@@ -97,6 +98,59 @@ def filtrer_tickets_par_statut(tickets, statut_recherche):
 
     return tickets_filtres
 
+def filtrer_tickets_par_gravite(tickets, gravite_recherche):
+
+    tickets_filtres = []
+
+    for ticket in tickets:
+
+        if ticket['gravite'] == gravite_recherche:
+
+            tickets_filtres.append(ticket)
+
+    return tickets_filtres
+
+
+def afficher_tickets_par_gravite(tickets):
+
+    if not tickets:
+        print("Aucun ticket enregistré.")
+
+    else:
+        gravites_valides = ["Basse", "Moyenne", "Haute", "Critique"]
+
+        for numero, gravite in enumerate(gravites_valides, start=1):
+            print(f"{numero} - {gravite}")
+
+        try :
+        
+            numero_gravite = int(input("Sélectionnez une gravité : "))
+
+            if 1 <= numero_gravite <= len(gravites_valides):
+
+                gravite_recherche = gravites_valides[numero_gravite - 1]
+
+                tickets_filtres = filtrer_tickets_par_gravite(tickets, gravite_recherche)
+
+                if not tickets_filtres:
+                    print("Aucun ticket ne correspond à cette gravité.")
+
+                else:
+                    print("=== LISTE DES TICKETS PAR GRAVITÉ ===")
+                    print()
+                    for ticket in tickets_filtres:
+                        print(f"ID : {ticket['id']}")
+                        print(f"Titre : {ticket['titre']}")
+                        print(f"Gravité : {ticket['gravite']}")
+                        print("-----------------------------")
+                        print()
+
+            else:
+                print("Ce numéro ne correspond à aucune gravité.")
+
+        except ValueError:
+            print("Un nombre est attendu pour filtrer les tickets par gravité.")
+
 
 def afficher_tickets_par_statut(tickets):
 
@@ -126,6 +180,7 @@ def afficher_tickets_par_statut(tickets):
         
                 else:
                     print("=== LISTE DES TICKETS PAR STATUT ===")
+                    print()
                     for ticket in tickets_filtres:
                         print(f"ID : {ticket['id']}")
                         print(f"Titre : {ticket['titre']}")
@@ -137,7 +192,7 @@ def afficher_tickets_par_statut(tickets):
                 print("Ce nombre ne correspond à aucun statut.")
 
         except ValueError:
-            print("Un nombre est attendu pour filtrer par statut.") 
+            print("Un nombre est attendu pour filtrer les tickets par statut.") 
 
 
 def ajouter_machine(machines):
@@ -405,6 +460,8 @@ while True:
         sauvegarder_donnees(machines, tickets)
     elif choix == "7":
         afficher_tickets_par_statut(tickets)
+    elif choix == "8":
+        afficher_tickets_par_gravite(tickets)
     elif choix == "0":
         sauvegarder_donnees(machines, tickets)
         print("Données sauvegardées. Au revoir.")
