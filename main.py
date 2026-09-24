@@ -41,6 +41,7 @@ def afficher_menu():
     print("6 - Supprimer un ticket")
     print("7 - Afficher les tickets par statut")
     print("8 - Afficher les tickets par gravité")
+    print("9 - Rechercher un ticket par titre")
     print("0 - Quitter")
     print()
 
@@ -84,6 +85,44 @@ def trouver_ticket_id(tickets, id_ticket):
             return ticket
 
     return None
+
+def rechercher_tickets_par_titre(tickets, mot_recherche):
+
+    tickets_trouves = []
+
+    for ticket in tickets:
+
+        if mot_recherche.lower() in ticket['titre'].lower():
+
+            tickets_trouves.append(ticket)
+
+    return tickets_trouves
+
+
+def afficher_recherche_tickets(tickets):
+
+    if not tickets:
+        print("Aucun ticket enregistré.")
+
+    else:
+
+        mot_recherche = demander_texte("Quel mot recherchez-vous ? ")
+
+        tickets_trouves = rechercher_tickets_par_titre(tickets, mot_recherche)
+
+        if not tickets_trouves:
+            print("Votre saisie n'apparaît dans aucun titre de ticket.")
+
+        else:
+            print(f'=== LISTE DE TICKETS CONTENANT "{mot_recherche}" ===')
+            print()
+            for ticket in tickets_trouves:
+                print(f"ID : {ticket['id']}")
+                print(f"Titre : {ticket['titre']}")
+                print(f"Gravité : {ticket['gravite']}")
+                print(f"Statut : {ticket['statut']}")
+                print("--------------------------------")
+                print()
 
 
 def filtrer_tickets_par_statut(tickets, statut_recherche):
@@ -462,6 +501,8 @@ while True:
         afficher_tickets_par_statut(tickets)
     elif choix == "8":
         afficher_tickets_par_gravite(tickets)
+    elif choix == "9":
+        afficher_recherche_tickets(tickets)
     elif choix == "0":
         sauvegarder_donnees(machines, tickets)
         print("Données sauvegardées. Au revoir.")

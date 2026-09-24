@@ -29,6 +29,7 @@ Ce projet me permet de mettre en pratique les fondamentaux de Python ainsi que l
 - Générer automatiquement un identifiant unique
 - Filtrer les tickets par statut
 - Filtrer les tickets par gravité
+- Rechercher des tickets par mot-clés dans leur titre
 
 ### Sauvegarde des données
 
@@ -104,6 +105,7 @@ Après le lancement, le menu principal permet de choisir une action en saisissan
 6 - Supprimer un ticket
 7 - Afficher les tickets par statut
 8 - Afficher les tickets par gravité
+9 - Rechercher un ticket par titre
 0 - Quitter
 ```
 
