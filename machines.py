@@ -7,6 +7,10 @@ def ajouter_machine(machines):
     print()
     
     machine_nom = demander_texte("Quel est le nom de la machine ? ")
+    while nom_machine_existe(machines, machine_nom):
+        print("Ce nom est déjà utilisé par une autre machine.")
+        machine_nom = demander_texte("Quel est le nom de la machine ? ")
+        
     machine_utilisateur = demander_texte("Quel est l'utilisateur de la machine ? ")
     machine_service = demander_texte("A quel service appartient la machine ? ")
 
@@ -65,3 +69,12 @@ def generer_id_machine(machines):
 
         return identifiant_suivant
 
+
+def nom_machine_existe(machines, nom_machine):
+
+    for machine in machines:
+
+        if nom_machine.lower() == machine['nom'].lower():
+            return True
+
+    return False

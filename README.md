@@ -16,6 +16,8 @@ Ce projet me permet de mettre en pratique les fondamentaux de Python ainsi que l
 - Enregistrer son nom, son utilisateur et son service
 - Afficher la liste des machines enregistrées
 - Refuser les saisies textuelles vides
+- Générer automatiquement un identifiant unique pour chaque machine
+- Empêcher l'ajout de deux machines portant le même nom
 
 ### Gestion des tickets
 
