@@ -62,6 +62,27 @@ Le fichier `donnees.json` est exclu du dépôt Git afin de ne pas publier les do
 - GitHub
 - Visual Studio Code
 
+## Structure du projet
+
+Le programme est organisé en plusieurs modules afin de séparer les responsabilités et de faciliter sa maintenance.
+
+```text
+gestionnaire-tickets-python/
+├── main.py
+├── machines.py
+├── tickets.py
+├── stockage.py
+├── utilitaires.py
+├── README.md
+└── .gitignore
+```
+
+- `main.py` : affiche le menu principal et coordonne les différentes fonctionnalités
+- `machines.py` : contient les fonctions liées à la gestion des machines
+- `tickets.py` : contient les fonctions de création, d’affichage, de modification, de suppression, de filtrage et de recherche des tickets
+- `stockage.py` : gère le chargement et la sauvegarde des données au format JSON
+- `utilitaires.py` : contient les fonctions communes utilisées par plusieurs modules
+
 ## Lancer le programme
 
 Python 3 doit être installé sur l’ordinateur.
