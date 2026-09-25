@@ -1,4 +1,5 @@
 from stockage import sauvegarder_donnees, charger_donnees
+from utilitaires import demander_texte
 
 
 def afficher_menu():
@@ -16,18 +17,6 @@ def afficher_menu():
     print("9 - Rechercher un ticket par titre")
     print("0 - Quitter")
     print()
-
-
-def demander_texte(message):
-  
-    texte = input(message).strip()
-
-    while len(texte) < 1:
-  
-        print("Vous devez entrer au moins 1 caractere")
-        texte = input(message).strip()
-
-    return texte
 
 
 def generer_id_ticket(tickets):
