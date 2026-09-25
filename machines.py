@@ -11,6 +11,7 @@ def ajouter_machine(machines):
     machine_service = demander_texte("A quel service appartient la machine ? ")
 
     machine = {
+        "id": generer_id_machine(machines),
         "nom": machine_nom,
         "utilisateur": machine_utilisateur,
         "service": machine_service
@@ -37,8 +38,30 @@ def afficher_machines(machines):
 
         for numero, machine in enumerate(machines, start=1):
             print(f"Machine {numero}")
+            print(f"ID : {machine['id']}")
             print(f"Nom : {machine['nom']}")
             print(f"Utilisateur : {machine['utilisateur']}")
             print(f"Service : {machine['service']}")
             print("-------------------------------------")
             print()
+
+
+
+def generer_id_machine(machines):
+
+    if not machines:
+
+        identifiant_suivant = 1
+
+        return identifiant_suivant
+
+    else:
+
+        identifiants = [machine['id'] for machine in machines]
+
+        identifiant_max_machines = max(identifiants)
+
+        identifiant_suivant = identifiant_max_machines + 1
+
+        return identifiant_suivant
+

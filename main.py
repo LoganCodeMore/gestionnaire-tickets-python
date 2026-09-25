@@ -11,7 +11,6 @@ from tickets import (
     )
 
 
-
 def afficher_menu():
 
     print("=== GESTIONNAIRE DE TICKETS ===")
