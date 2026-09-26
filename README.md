@@ -36,6 +36,7 @@ Ce projet me permet de mettre en pratique les fondamentaux de Python ainsi que l
 - Filtrer les tickets par statut
 - Filtrer les tickets par gravité
 - Rechercher des tickets par mot-clés dans leur titre
+- Enregistrer automatiquement la date et l'heure de création d'un ticket
 
 ### Sauvegarde des données
 

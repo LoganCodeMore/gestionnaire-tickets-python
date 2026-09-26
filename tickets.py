@@ -1,4 +1,5 @@
 from utilitaires import demander_texte
+from datetime import datetime
 
 
 
@@ -65,6 +66,7 @@ def afficher_recherche_tickets(tickets):
                 print(f"Titre : {ticket['titre']}")
                 print(f"Gravité : {ticket['gravite']}")
                 print(f"Statut : {ticket['statut']}")
+                print(f"Date de création : {ticket.get('date_creation', 'Non renseignée')}")
                 print("--------------------------------")
                 print()
 
@@ -125,6 +127,7 @@ def afficher_tickets_par_gravite(tickets):
                         print(f"ID : {ticket['id']}")
                         print(f"Titre : {ticket['titre']}")
                         print(f"Gravité : {ticket['gravite']}")
+                        print(f"Date de création : {ticket.get('date_creation', 'Non renseignée')}")
                         print("-----------------------------")
                         print()
 
@@ -168,6 +171,7 @@ def afficher_tickets_par_statut(tickets):
                         print(f"ID : {ticket['id']}")
                         print(f"Titre : {ticket['titre']}")
                         print(f"Statut : {ticket['statut']}")
+                        print(f"Date de création : {ticket.get('date_creation', 'Non renseignée')}")
                         print("------------------------------")
                         print()
 
@@ -218,6 +222,7 @@ def creer_ticket(machines, tickets):
 
                     print("Gravité invalide. Choisissez Basse, Moyenne, Haute ou Critique.")
 
+                date_creation = datetime.now().strftime("%d/%m/%Y %H:%M")
 
                 ticket = {
                     "id": generer_id_ticket(tickets),
@@ -225,7 +230,8 @@ def creer_ticket(machines, tickets):
                     "titre": titre_incident,
                     "description": description_incident,
                     "gravite": gravite_incident,
-                    "statut": "Nouveau"
+                    "statut": "Nouveau",
+                    "date_creation": date_creation
                 }
 
                 tickets.append(ticket)
@@ -259,6 +265,7 @@ def afficher_tickets(tickets):
             print(f"Description : {ticket['description']}")
             print(f"Gravité : {ticket['gravite']}")
             print(f"Statut : {ticket['statut']}")
+            print(f"Date de création : {ticket.get('date_creation', 'Non renseignée')}")
             print("--------------------------------------")
             print()
 
