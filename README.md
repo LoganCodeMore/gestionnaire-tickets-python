@@ -119,21 +119,41 @@ py main.py
 
 ## Utilisation
 
-Après le lancement, le menu principal permet de choisir une action en saisissant son numéro :
+Après le lancement, le menu principal permet d'accéder à la gestion des machines ou à celle des tickets.
 
 ```text
 === GESTIONNAIRE DE TICKETS ===
 
+1 - Gestion des machines
+2 - Gestion des tickets
+0 - Quitter
+```
+
+### Menu des machines
+
+```text
+=== GESTION DES MACHINES ===
+
 1 - Ajouter une machine
 2 - Afficher les machines
-3 - Créer un ticket
-4 - Afficher les tickets
-5 - Modifier le statut d'un ticket
-6 - Supprimer un ticket
-7 - Afficher les tickets par statut
-8 - Afficher les tickets par gravité
-9 - Rechercher un ticket par titre
-0 - Quitter
+3 - Modifier une machine
+4 - Supprimer une machine
+0 - Retour au menu principal
+```
+
+### Menu des tickets
+
+```text
+=== GESTION DES TICKETS ===
+
+1 - Créer un ticket
+2 - Afficher les tickets
+3 - Modifier le statut d'un ticket
+4 - Supprimer un ticket
+5 - Afficher les tickets par statut
+6 - Afficher les tickets par gravité
+7 - Rechercher un ticket par titre
+0 - Retour au menu principal
 ```
 
 ## État du projet
