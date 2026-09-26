@@ -156,6 +156,15 @@ Après le lancement, le menu principal permet d'accéder à la gestion des machi
 7 - Rechercher un ticket par titre
 0 - Retour au menu principal
 ```
+## Tests
+
+Des tests automatisés vérifient le fonctionnement de certaines fonctions essentielles, notamment la génération des identifiants uniques.
+
+Pour lancer les tests :
+
+```powershell
+python test_fonctions.py
+```
 
 ## État du projet
 
