@@ -1,5 +1,5 @@
 from stockage import sauvegarder_donnees, charger_donnees
-from machines import ajouter_machine, afficher_machines
+from machines import ajouter_machine, afficher_machines, modifier_machine
 from tickets import (
     creer_ticket,
     afficher_tickets,
@@ -24,6 +24,7 @@ def afficher_menu():
     print("7 - Afficher les tickets par statut")
     print("8 - Afficher les tickets par gravité")
     print("9 - Rechercher un ticket par titre")
+    print("10 - Modifier une machine")
     print("0 - Quitter")
     print()
 
@@ -58,6 +59,9 @@ while True:
         afficher_tickets_par_gravite(tickets)
     elif choix == "9":
         afficher_recherche_tickets(tickets)
+    elif choix == "10":
+        modifier_machine(machines, tickets)
+        sauvegarder_donnees(machines, tickets)
     elif choix == "0":
         sauvegarder_donnees(machines, tickets)
         print("Données sauvegardées. Au revoir.")

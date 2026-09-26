@@ -18,6 +18,8 @@ Ce projet me permet de mettre en pratique les fondamentaux de Python ainsi que l
 - Refuser les saisies textuelles vides
 - Générer automatiquement un identifiant unique pour chaque machine
 - Empêcher l'ajout de deux machines portant le même nom
+- Modifier le nom, l'utilisateur ou le service d'une machine
+- Mettre à jour automatiquement les tickets associés lors du renommage d'une machine
 
 ### Gestion des tickets
 

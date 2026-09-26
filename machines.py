@@ -86,7 +86,7 @@ def trouver_machine_id(machines, id_machine):
 
     return None
 
-def modifier_machine(machines):
+def modifier_machine(machines,tickets):
 
     if not machines:
         print("Modification impossible : aucune machine enregistrée.")
@@ -121,7 +121,22 @@ def modifier_machine(machines):
                             print("Modification annulée.")
 
                         elif choix_modifier == 1:
-                            print("La modification du nom sera ajoutée ultérieurement.")
+                            ancien_nom = machine_trouve['nom']
+                            nouveau_nom = demander_texte("Quel est le nouveau nom de la machine ? ")
+
+                            while nouveau_nom.lower() != ancien_nom.lower() and nom_machine_existe(machines, nouveau_nom):
+                                print("Ce nom est déjà utilisé par une autre machine.")
+                                nouveau_nom = demander_texte("Quel est le nouveau nom de la machine ? ")
+
+                            machine_trouve['nom'] = nouveau_nom
+
+                            for ticket in tickets:
+
+                                if ticket['machine'].lower() == ancien_nom.lower():
+                                    ticket['machine'] = nouveau_nom
+
+                            print(f"La machine {ancien_nom} a été renommée en {nouveau_nom} ainsi que les tickets qui lui sont associés.")
+
 
                         elif choix_modifier == 2:
                             nouvel_utilisateur = demander_texte("Quel est le nouvel utilisateur de cette machine ? ")
