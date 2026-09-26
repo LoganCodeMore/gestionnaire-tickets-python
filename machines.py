@@ -162,3 +162,53 @@ def modifier_machine(machines,tickets):
 
 
 
+def supprimer_machine(machines, tickets):
+
+    if not machines:
+        print("Suppression impossible : aucune machine enregistrée.")
+
+    else:
+        afficher_machines(machines)
+
+        try:
+
+            id_supprimer_machine = int(input("Entrez l'identifiant de la machine que vous souhaitez supprimer : "))
+
+            machine_trouve_supprimer = trouver_machine_id(machines, id_supprimer_machine)
+
+            if machine_trouve_supprimer is None:
+                print("Cet identifiant ne correspond à aucune machine.")
+
+            else:
+                print(f"Machine sélectionnée : {machine_trouve_supprimer['nom']}")
+                tickets_associes = 0
+
+                for ticket in tickets:
+
+                    if machine_trouve_supprimer['nom'].lower() == ticket['machine'].lower():
+                        tickets_associes += 1
+
+                if tickets_associes == 0:
+                    reponse_suppression_machine = input("Voulez-vous supprimer cette machine du parc informatique ? ").strip().lower()
+                    
+                    while reponse_suppression_machine != "oui" and reponse_suppression_machine != "non":
+                        print("Saisie invalide, pour confirmer la suppression de la machine tapez oui, pour annuler la suppression tapez non.")
+                        reponse_suppression_machine = input("Voulez-vous supprimer cette machine du parc informatique ? ").strip().lower()
+
+                    if reponse_suppression_machine == "oui":
+                        machines.remove(machine_trouve_supprimer)
+                        print("La machine a été supprimée du parc informatique.")
+
+                    else:
+                        print("Suppression annulée : la machine est conservée dans le parc informatique.")
+
+
+                elif tickets_associes == 1:
+                    print("Suppression impossible : 1 ticket est associé à cette machine.")
+
+                else:
+                    print(f"Suppression impossible : {tickets_associes} tickets sont associés à cette machine.")
+
+
+        except ValueError:
+            print("Un nombre est attendu pour sélectionner une machine.")

@@ -20,6 +20,8 @@ Ce projet me permet de mettre en pratique les fondamentaux de Python ainsi que l
 - Empêcher l'ajout de deux machines portant le même nom
 - Modifier le nom, l'utilisateur ou le service d'une machine
 - Mettre à jour automatiquement les tickets associés lors du renommage d'une machine
+- Supprimer une machine après confirmation
+- Empêcher la suppression d'une machine possédant encore des tickets
 
 ### Gestion des tickets
 
