@@ -3,7 +3,7 @@ from utilitaires import demander_texte
 
 def ajouter_machine(machines):
 
-    print("Vous avez choisi d'ajouter une machine au parc informatique")
+    print("=== AJOUT D'UNE MACHINE ===")
     print()
     
     machine_nom = demander_texte("Quel est le nom de la machine ? ")
@@ -86,7 +86,7 @@ def trouver_machine_id(machines, id_machine):
 
     return None
 
-def modifier_machine(machines,tickets):
+def modifier_machine(machines, tickets):
 
     if not machines:
         print("Modification impossible : aucune machine enregistrée.")

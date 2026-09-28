@@ -185,7 +185,7 @@ def afficher_tickets_par_statut(tickets):
 
 def creer_ticket(machines, tickets):
 
-    print("Vous avez choisi de créer un ticket")
+    print("=== CRÉATION D'UN TICKET ===")
     print()
 
     if not machines:
@@ -197,10 +197,12 @@ def creer_ticket(machines, tickets):
             print(f"Nom : {machine['nom']}")
             print(f"Utilisateur : {machine['utilisateur']}")
             print(f"Service : {machine['service']}")
+            print("-----------------------------------")
             print()
 
         try:
             numero_machine = int(input("Quelle machine voulez-vous choisir pour créer un ticket ? "))
+            print()
 
             if 1 <= numero_machine <= len(machines):
 
@@ -247,9 +249,6 @@ def creer_ticket(machines, tickets):
 
 
 def afficher_tickets(tickets):
-
-    print("Vous avez choisi d'afficher les tickets")
-    print()
 
     if not tickets:
         print("Aucun ticket enregistré.")
@@ -322,7 +321,7 @@ def supprimer_ticket(tickets):
 
 def modifier_statut_ticket(tickets):
 
-    print("Vous avez choisi de modifier le statut d'un ticket")
+    print("=== MODIFICATION DU STATUT D'UN TICKET ===")
     print()
 
     if not tickets:
