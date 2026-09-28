@@ -286,6 +286,7 @@ def supprimer_ticket(tickets):
 
         try:
             id_supprimer = int(input("Entrez l'identifiant du ticket à supprimer : "))
+            print()
 
             
             ticket_selectionne = trouver_ticket_id(tickets, id_supprimer)
@@ -301,10 +302,12 @@ def supprimer_ticket(tickets):
                 print()
 
                 reponse_suppression = input("Voulez-vous supprimer ce ticket ? ").strip().lower()
+                print()
 
                 while reponse_suppression != "oui" and reponse_suppression != "non":
                     print("Saisie invalide, pour confirmer la suppression du ticket tapez oui, pour annuler la suppression tapez non.")
                     reponse_suppression = input("Voulez-vous supprimer ce ticket ? ").strip().lower()
+                    print()
 
                 if reponse_suppression == "oui":
                     tickets.remove(ticket_selectionne)    

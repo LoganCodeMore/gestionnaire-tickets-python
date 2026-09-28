@@ -173,6 +173,7 @@ def supprimer_machine(machines, tickets):
         try:
 
             id_supprimer_machine = int(input("Entrez l'identifiant de la machine que vous souhaitez supprimer : "))
+            print()
 
             machine_trouve_supprimer = trouver_machine_id(machines, id_supprimer_machine)
 
@@ -181,6 +182,7 @@ def supprimer_machine(machines, tickets):
 
             else:
                 print(f"Machine sélectionnée : {machine_trouve_supprimer['nom']}")
+                print()
                 tickets_associes = 0
 
                 for ticket in tickets:
@@ -190,6 +192,7 @@ def supprimer_machine(machines, tickets):
 
                 if tickets_associes == 0:
                     reponse_suppression_machine = input("Voulez-vous supprimer cette machine du parc informatique ? ").strip().lower()
+                    print()
                     
                     while reponse_suppression_machine != "oui" and reponse_suppression_machine != "non":
                         print("Saisie invalide, pour confirmer la suppression de la machine tapez oui, pour annuler la suppression tapez non.")

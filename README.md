@@ -168,4 +168,8 @@ python test_fonctions.py
 
 ## État du projet
 
-Le projet est en cours de développement. De nouvelles fonctionnalités et améliorations seront ajoutées progressivement.
+La version `1.0.0` du gestionnaire de tickets est terminée et stable.
+
+Les fonctionnalités prévues pour cette première version sont implémentées, les données sont sauvegardées au format JSON et les principales fonctions sont couvertes par des tests automatisés.
+
+Le projet pourra évoluer ultérieurement avec une base de données, une interface graphique ou web et une gestion plus avancée des utilisateurs.
